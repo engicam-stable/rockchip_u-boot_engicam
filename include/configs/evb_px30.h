@@ -9,6 +9,9 @@
 
 #include <configs/px30_common.h>
 
+/* Allow to overwrite serial and ethaddr */
+#define CONFIG_ENV_OVERWRITE
+
 #define CONFIG_SYS_MMC_ENV_DEV 0
 
 #define ROCKCHIP_DEVICE_SETTINGS \
