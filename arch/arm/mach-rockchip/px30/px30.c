@@ -175,17 +175,46 @@ void board_debug_uart_init(void)
 		GPIO1D0_SDIO_D2,
 	};
 
+		/* GRF_GPIO2BH_IOMUX */
+	enum {
+		GPIO2B7_SHIFT		= 12,
+		GPIO2B7_MASK		= 0xf << GPIO2B7_SHIFT,
+		GPIO2B7_GPIO		= 0,
+		GPIO2B7_CIF_D10M0,
+		GPIO2B7_I2C2_SCL,
+
+		GPIO2B6_SHIFT		= 8,
+		GPIO2B6_MASK		= 0xf << GPIO2B6_SHIFT,
+		GPIO2B6_GPIO		= 0,
+		GPIO2B6_CIF_D1M0,
+		GPIO2B6_UART2_RXM1,
+
+		GPIO2B5_SHIFT		= 4,
+		GPIO2B5_MASK		= 0xf << GPIO2B5_SHIFT,
+		GPIO2B5_GPIO		= 0,
+		GPIO2B5_PWM2,
+
+		GPIO2B4_SHIFT		= 0,
+		GPIO2B4_MASK		= 0xf << GPIO2B4_SHIFT,
+		GPIO2B4_GPIO		= 0,
+		GPIO2B4_CIF_D0M0,
+		GPIO2B4_UART2_TXM1,
+	};
+
+
 	/* Do not set the iomux in U-Boot proper because SD card may using it */
 	/* Enable early UART2 channel m0 on the px30 */
-	rk_clrsetreg(&grf->gpio1dl_iomux,
-		     GPIO1D3_MASK | GPIO1D2_MASK,
-		     GPIO1D3_UART2_RXM0 << GPIO1D3_SHIFT |
-		     GPIO1D2_UART2_TXM0 << GPIO1D2_SHIFT);
+	rk_clrsetreg(&grf->gpio2bh_iomux,
+		     GPIO2B6_MASK,
+		     GPIO2B6_UART2_RXM1 << GPIO2B6_SHIFT);
+	rk_clrsetreg(&grf->gpio2bh_iomux,
+		     GPIO2B4_MASK,
+		     GPIO2B4_UART2_TXM1 << GPIO2B4_SHIFT);				 
 #endif
 	/* Set channel C as UART2 input */
 	rk_clrsetreg(&grf->iofunc_con0,
 		     CON_IOMUX_UART2SEL_MASK,
-		     CON_IOMUX_UART2SEL_M0 << CON_IOMUX_UART2SEL_SHIFT);
+		     CON_IOMUX_UART2SEL_M1 << CON_IOMUX_UART2SEL_SHIFT);
 #endif
 }
 

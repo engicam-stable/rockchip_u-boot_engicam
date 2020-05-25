@@ -448,6 +448,11 @@ static int rk8xx_probe(struct udevice *dev)
 		off_source = RK817_OFF_SOURCE;
 		init_data = rk817_init_reg;
 		init_data_num = ARRAY_SIZE(rk817_init_reg);
+
+		//raise voltage to 3.3V
+		pmic_reg_write(dev, REG_BUCK4_ON_VSEL, 0x20);
+		pmic_reg_write(dev, REG_LDO4_ON_VSEL, 0x69);
+
 		power_en0 = pmic_reg_read(dev, RK817_POWER_EN0);
 		power_en1 = pmic_reg_read(dev, RK817_POWER_EN1);
 		power_en2 = pmic_reg_read(dev, RK817_POWER_EN2);
