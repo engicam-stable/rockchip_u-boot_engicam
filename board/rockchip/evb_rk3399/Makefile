@@ -5,3 +5,4 @@
 #
 
 obj-y	+= evb-rk3399.o
+obj-y	+= smarcore-rk3399.o
