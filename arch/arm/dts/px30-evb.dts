@@ -399,11 +399,18 @@
 	status = "okay";
 };
 
+/*
+*	max-frequency = <50000000>
+*	Set value for calibration problem on some eMMC.
+*	The correct calibration and maximum frequency will be set by the kernel.
+*/
+
 &emmc {
 	u-boot,dm-pre-reloc;
 	fifo-mode;
 	bus-width = <8>;
 	cap-mmc-highspeed;
+	max-frequency = <50000000>;
 	mmc-hs200-1_8v;
 	supports-emmc;
 	disable-wp;
